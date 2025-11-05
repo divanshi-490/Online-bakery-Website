@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place Your Order | Sweet Crumbs Bakery</title>
+  <link rel="stylesheet" href="project.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <h1>CrèmeCraft</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html" class="active">Place Order</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Order Section -->
+  <section class="order-section">
+    <h2>Place Your Order</h2>
+    <p>Please fill out the form below to order your favorite bakery items.</p>
+
+    <form id="orderForm">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+      <label for="items">Select Bakery Item:</label>
+      <select id="items" name="items" required>
+        <option value="">-- Choose an item --</option>
+        <option value="Chocolate Cake">Chocolate Cake - ₹450</option>
+        <option value="Vanilla Cupcake">Vanilla Cupcake - ₹380</option>
+        <option value="Strawberry Tart">Strawberry Tart - ₹150</option>
+        <option value="Red Velvet Cake">Red Velvet Cake - ₹300</option>
+        <option value="Blueberry Muffin">Blueberry Muffin - ₹320</option>
+        <option value="Oreo Cheesecake">Oreo Cheesecake - ₹280</option>
+      </select>
+
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+      <!-- Custom Cake Designer Section -->
+      <h3> Design Your Custom Cake</h3>
+      <p>Select your favorite options to create a personalized cake!</p>
+
+      <label>Base Flavor:</label>
+      <select id="base">
+        <option value="Chocolate" data-price="300">Chocolate - ₹300</option>
+        <option value="Vanilla" data-price="250">Vanilla - ₹250</option>
+        <option value="Red Velvet" data-price="350">Red Velvet - ₹350</option>
+        <option value="Strawberry" data-price="320">Strawberry - ₹320</option>
+      </select>
+
+      <label>Frosting Type:</label>
+      <select id="frosting">
+        <option value="Buttercream" data-price="80">Buttercream - ₹80</option>
+        <option value="Whipped Cream" data-price="100">Whipped Cream - ₹100</option>
+        <option value="Fondant" data-price="150">Fondant - ₹150</option>
+      </select>
+
+      <label>Add-ons (optional):</label>
+      <div class="addons">
+        <label><input type="checkbox" value="Choco Chips" data-price="40"> Choco Chips</label>
+        <label><input type="checkbox" value="Sprinkles" data-price="30"> Sprinkles</label>
+        <label><input type="checkbox" value="Berries" data-price="60"> Berries</label>
+        <label><input type="checkbox" value="Nuts" data-price="50"> Nuts</label>
+      </div>
+
+      <button type="button" onclick="generateCake()">View Custom Cake Summary</button>
+
+      <div class="result">
+        <h3>Your Cake Summary </h3>
+        <p id="summary"></p>
+        <h4 id="price"></h4>
+      </div>
+
+      <label for="address">Delivery Address:</label>
+      <textarea id="address" name="address" rows="3" placeholder="Enter your address" required></textarea>
+
+      <button type="submit">Place Order</button>
+    </form>
+  </section>
+
+  <script>
+    // Custom Cake Functionality
+    function generateCake() {
+      const base = document.getElementById('base');
+      const frosting = document.getElementById('frosting');
+      const addons = document.querySelectorAll('.addons input[type="checkbox"]:checked');
+
+      let baseName = base.value;
+      let frostingName = frosting.value;
+      let total = parseInt(base.selectedOptions[0].dataset.price) + parseInt(frosting.selectedOptions[0].dataset.price);
+
+      let addonsList = [];
+      addons.forEach(addon => {
+        addonsList.push(addon.value);
+        total += parseInt(addon.dataset.price);
+      });
+
+      let summaryText = `You chose a <strong>${baseName}</strong> cake with <strong>${frostingName}</strong> frosting`;
+      if (addonsList.length > 0) {
+        summaryText += ` and toppings: <strong>${addonsList.join(', ')}</strong>.`;
+      } else {
+        summaryText += `.`;
+      }
+
+      document.getElementById('summary').innerHTML = summaryText;
+      document.getElementById('price').innerHTML = `Total Price: ₹${total}`;
+    }
+  </script>
+</body>
+
+</html>

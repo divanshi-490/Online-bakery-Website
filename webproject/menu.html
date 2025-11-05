@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bakery Menu</title>
+  <link rel="stylesheet" href="project.css">
+</head>
+
+<body>
+
+    <header>
+      <nav>
+        <h1>CrèmeCraft</h1>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="reviews.html">Reviews</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html">Place Order</a></li>
+        </ul>
+      </nav>
+    </header>
+
+
+
+    
+
+
+  <div class="menu-container">
+    <div class="menu-item" onclick="showInfo('Chocolate Cake')">
+      <img src="https://tse1.mm.bing.net/th/id/OIP.7qetv7oPcSC0Gs6TtldFWgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Chocolate Cake">
+      <h3>Chocolate Cake</h3>
+      <p>₹450</p>
+    </div>
+
+    <div class="menu-item" onclick="showInfo('Vanilla Cupcake')">
+      <img src="https://trufflebyeliana.com/wp-content/uploads/2016/05/vanilla_sprinkles.jpg" alt="Vanilla Cupcake">
+      <h3>Vanilla Cupcake</h3>
+      <p>₹380</p>
+    </div>
+
+    <div class="menu-item" onclick="showInfo('Strawberry Tart')">
+      <img src="https://static.vecteezy.com/system/resources/previews/047/591/444/non_2x/delicious-strawberry-tart-png.png" alt="Strawberry Tart">
+      <h3>Strawberry Tart</h3>
+      <p>₹150</p>
+    </div>
+
+    <div class="menu-item" onclick="showInfo('Red Velvet Cake')">
+      <img src="https://png.pngtree.com/png-clipart/20211128/original/pngtree-red-velvet-cake-with-cream-and-cherry-png-image_6951977.png" alt="Red Velvet Cake">
+      <h3>Red Velvet Cake</h3>
+      <p>₹300</p>
+    </div>
+
+    <div class="menu-item" onclick="showInfo('Blueberry Muffin')">
+      <img src="https://tse2.mm.bing.net/th/id/OIP.4qcYGgemXJD7vmkm_NF2BQHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Blueberry Muffin">
+      <h3>Blueberry Muffin</h3>
+      <p>₹320</p>
+    </div>
+
+    <div class="menu-item" onclick="showInfo('Oreo Cheesecake')">
+      <img src="https://m.media-amazon.com/images/I/81idxFVpdqL._AC_SL1500_.jpg" alt="Oreo Cheesecake">
+      <h3>Oreo Cheesecake</h3>
+      <p>₹280</p>
+    </div>
+  </div>
+
+  <!-- Popup Modal -->
+  <div id="popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2 id="itemName"></h2>
+      <p><strong>Calories:</strong> <span id="itemCalories"></span> kcal</p>
+      <p><strong>Ingredients:</strong></p>
+      <ul id="itemIngredients"></ul>
+    </div>
+  </div>
+
+  <script>
+    const items = {
+      "Chocolate Cake": {
+        calories: 420,
+        ingredients: ["Flour", "Cocoa Powder", "Butter", "Sugar", "Eggs", "Cream"]
+      },
+      "Vanilla Cupcake": {
+        calories: 180,
+        ingredients: ["Flour", "Milk", "Vanilla Essence", "Butter", "Sugar"]
+      },
+      "Strawberry Tart": {
+        calories: 250,
+        ingredients: ["Flour", "Butter", "Strawberry Jam", "Sugar", "Cream"]
+      },
+      "Red Velvet Cake": {
+        calories: 390,
+        ingredients: ["Flour", "Cocoa", "Butter", "Red Food Color", "Cream Cheese"]
+      },
+      "Blueberry Muffin": {
+        calories: 200,
+        ingredients: ["Flour", "Butter", "Blueberries", "Milk", "Sugar"]
+      },
+      "Oreo Cheesecake": {
+        calories: 450,
+        ingredients: ["Oreo Biscuits", "Cream Cheese", "Butter", "Sugar", "Milk"]
+      }
+    };
+
+    function showInfo(itemName) {
+      const item = items[itemName];
+      document.getElementById("itemName").textContent = itemName;
+      document.getElementById("itemCalories").textContent = item.calories;
+
+      const ingredientsList = document.getElementById("itemIngredients");
+      ingredientsList.innerHTML = "";
+      item.ingredients.forEach(ingredient => {
+        const li = document.createElement("li");
+        li.textContent = ingredient;
+        ingredientsList.appendChild(li);
+      });
+
+      document.getElementById("popup").style.display = "block";
+    }
+
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
+
+
+
+    
+  </script>
+</body>
+
+</html>
